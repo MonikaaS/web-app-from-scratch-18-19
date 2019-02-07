@@ -4,7 +4,7 @@
 const app = document.getElementById('root')
 
 const container = document.createElement('div')
-container.setAttribute('class', 'container')
+container.classList.add('container')
 
 app.appendChild(container)
 
@@ -19,18 +19,18 @@ request.onload = function () {
         data.forEach(characters => {
 
             const card = document.createElement('div')
-            card.setAttribute('class', 'card')
+            card.classList.add('card')
 
             const h1 = document.createElement('h1')
             h1.innerHTML = characters.name
 
-            const p = document.createElement('p')
-            p.innerHTML = characters.region
+            const region = document.createElement('p')
+            region.innerHTML = characters.region == undefined ? "no region" : characters.region
 
             container.appendChild(card)
 
             card.appendChild(h1)
-            card.appendChild(p)
+            card.appendChild(region)
             console.log(characters)
             //cat.name, cat.discription, cat.origin, cat.temperament, cat.weight.metric
         })

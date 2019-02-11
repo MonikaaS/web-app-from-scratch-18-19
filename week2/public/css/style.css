@@ -16,7 +16,7 @@ p {
     margin: 0 auto;
 }
 
-.container {
+#container {
     display: flex;
     flex-wrap: wrap;
 }

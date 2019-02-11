@@ -2,12 +2,12 @@
 (function () {
     // set variables
     const url = 'https://api.got.show/api/houses/';
-    const app = document.getElementById('root')
+    const app = document.getElementById('container')
 
     // render data
     var render = data => {
         data.forEach((house, i) => {
-            let html = `<div class="container"><div class="card"><h1>${house.name}</h1><p>${house.region == undefined ? "no region" : house.region}</p></div></div>`;
+            let html = `<div class="card"><h1>${house.name}</h1><p>${house.region == undefined ? "no region" : house.region}</p></div>`;
             app.insertAdjacentHTML('beforeend', html);
             console.log(house)
         });
@@ -30,6 +30,7 @@
 
         request.onerror = () => {
             // There was a connection error of some sort
+            console.log('error')
         };
 
         request.send();

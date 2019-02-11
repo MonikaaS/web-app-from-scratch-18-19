@@ -1,13 +1,13 @@
 //promise example use from: https://codepen.io/joostf/pen/OQxpxx
 (function () {
     // set variables
-    const url = 'https://api.got.show/api/houses/';
-    const app = document.getElementById('container')
+    var url = 'https://api.got.show/api/houses/';
+    var app = document.getElementById('container')
 
     // render data
     var render = data => {
         data.forEach((house, i) => {
-            let html = `
+            var html = `
             <div class="card">
             <h1>${house.name}</h1>
             <p>${house.region == undefined ? "no region" : house.region}</p>
@@ -24,7 +24,7 @@
         request.onload = () => {
             if (request.status >= 200 && request.status < 400) {
                 // Success!
-                const data = JSON.parse(request.responseText);
+                var data = JSON.parse(request.responseText);
                 resolve(data);
             } else {
                 // We reached our target server, but it returned an error

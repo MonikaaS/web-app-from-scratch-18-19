@@ -1,5 +1,6 @@
-//promise example use from: https://codepen.io/joostf/pen/OQxpxx
+//promise example used from: https://scotch.io/tutorials/javascript-promises-for-dummies, https://codepen.io/joostf/pen/OQxpxx
 (function () {
+    'use strict'
     // set variables
     var url = 'https://api.got.show/api/houses/';
     var app = document.getElementById('container')
@@ -9,8 +10,8 @@
         data.forEach((house, i) => {
             var html = `
             <div class="card">
-            <h1>${house.name}</h1>
-            <p>${house.region == undefined ? "no region" : house.region}</p>
+            <a href='/${house._id}'>${house.name}</a>
+            <p>region: ${house.region == undefined ? "no region" : house.region}</p>
             </div>`;
             app.insertAdjacentHTML('beforeend', html);
             console.log(house)

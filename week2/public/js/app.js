@@ -10,11 +10,11 @@
         data.forEach((house, i) => {
             var html = `
             <div class="card">
-            <a href='/${house._id}'>${house.name}</a>
+            <a href='/#${house._id}'>${house.name}</a>
             <p>region: ${house.region == undefined ? "no region" : house.region}</p>
             </div>`;
             app.insertAdjacentHTML('beforeend', html);
-            console.log(house)
+
         });
     }
 
@@ -44,4 +44,9 @@
     loadData.then(data => {
         render(data);
     });
+
+    routie('data._id', function () {
+        console.log('het werkt')
+    });
+
 })();

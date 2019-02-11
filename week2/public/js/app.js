@@ -7,7 +7,11 @@
     // render data
     var render = data => {
         data.forEach((house, i) => {
-            let html = `<div class="card"><h1>${house.name}</h1><p>${house.region == undefined ? "no region" : house.region}</p></div>`;
+            let html = `
+            <div class="card">
+            <h1>${house.name}</h1>
+            <p>${house.region == undefined ? "no region" : house.region}</p>
+            </div>`;
             app.insertAdjacentHTML('beforeend', html);
             console.log(house)
         });

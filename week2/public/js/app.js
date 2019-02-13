@@ -45,8 +45,4 @@
         render(data);
     });
 
-    routie('data._id', function () {
-        console.log('het werkt')
-    });
-
 })();

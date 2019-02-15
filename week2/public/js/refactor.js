@@ -13,9 +13,10 @@
                 routie("/")
             },
             detail: function () {
+                console.log('hallo')
                 api.get().then(data => {
                     console.log(data._id)
-                    routie(":56fa9ae4c9e167a3645523cc", () => {
+                    routie(":id", () => {
                         render.detail(data)
                         console.log('dit is de detail')
                     })
@@ -74,7 +75,7 @@
                 data.forEach((detail, i) => {
                     var html = `
                 <div class="card">
-                <a href='/#${detail._id}'>${detail.name}</a>
+                <a href='#${detail._id}'>${detail.name}</a>
                 <p>region: ${detail.region == undefined ? "no region" : detail.region}</p>
                 <p>region: ${detail.coatOfArms == undefined ? "no coat of arms" : detail.coatOfArms}</p>
                 </div>`;

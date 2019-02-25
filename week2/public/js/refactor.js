@@ -1,24 +1,33 @@
 (function () {
     "use strict";
 
-    //router
-    var router = {
-        overview: function () {
-            api.get().then(data => {
-                routie("/", () => {
-                    render.overview(data);
-                    console.log("dit is de home");
-                });
-            });
-            routie("/");
-        },
-        detail: function () {
-            routie("/:id", id => {
-                render.detail(id);
-                console.log("dit is de detail");
-            });
+    //app
+    const app = {
+        init: function () {
+            console.log('App: Init');
+            // TODO: Setup Hashchange/HistoryAPI URL listening
+            // Reload the current page, or the homepage if no id and data is present
         }
-    };
+    }
+
+    // //router
+    // var router = {
+    //     overview: function () {
+    //         api.get().then(data => {
+    //             routie("/", () => {
+    //                 render.overview(data);
+    //                 console.log("dit is de home");
+    //             });
+    //         });
+    //         routie("/");
+    //     },
+    //     detail: function () {
+    //         routie("/:id", id => {
+    //             render.detail(id);
+    //             console.log("dit is de detail");
+    //         });
+    //     }
+    // };
 
     //api
     var api = {
@@ -34,9 +43,6 @@
                         // Success!
                         var data = JSON.parse(request.responseText);
                         resolve(data);
-
-                        router.detail(id);
-                        console.log(data);
                     } else {
                         // We reached our target server, but it returned an error
                         reject(error);
@@ -59,12 +65,10 @@
             var app = document.getElementById("container");
             app.innerHTML = ''
 
-            data.forEach((house, i) => {
+            data.forEach(house => {
                 var html = `
                 <div class="card">
-                <a href="${
-                  "#/" +
-                  house._id}">${house.name}</a>
+                <a href="${"#/" + house._id}">${house.name}</a>
                 <p>region: ${
                   house.region == undefined ? "no region" : house.region
                 }</p>
@@ -75,21 +79,43 @@
         detail: function (id) {
             var app = document.getElementById("container");
             app.innerHTML = ''
-            console.log(id);
-            var html = `
+
+            id.forEach(id => {
+                var html = `
                 <div class="card">
-                <p>${id._id}</p>
+                <h2>${id.name}</h2>
                 <p>region: ${
-                  id.region == undefined ? "no region" : id.region
+                    id.region == undefined ? "no region" : id.region
                 }</p>
-                <p>region: ${
-                  id.coatOfArms == undefined ? "no coat of arms" : id.coatOfArms
+                <p>coat of arms: ${
+                    id.coatOfArms == undefined ? "no coat of arms" : id.coatOfArms
                 }</p>
                 </div>`;
-            app.insertAdjacentHTML("beforeend", html);
+                app.insertAdjacentHTML("beforeend", html);
+            });
         }
     };
 
+    //routie
+    routie({
+        '/': function () {
+            api.get().then(data => {
+                render.overview(data);
+                console.log("dit is de home");
+            });
+        },
+        '/:id': function (id) {
+            api.get().then(data => {
+                var specificId = data.filter(x => {
+                    return x._id == id
+                })
+
+                render.detail(specificId);
+                console.log("dit is de detail");
+            });
+        }
+    });
+
     // start the application
-    router.overview();
+    app.init()
 })();

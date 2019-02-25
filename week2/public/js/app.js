@@ -1,15 +1,6 @@
 (function () {
     "use strict"
 
-    //app
-    const app = {
-        init: function () {
-            console.log('App: Init')
-            // TODO: Setup Hashchange/HistoryAPI URL listening
-            // Reload the current page, or the homepage if no id and data is present
-        }
-    }
-
     //api
     var api = {
         get: function () {
@@ -19,7 +10,7 @@
                 var request = new XMLHttpRequest()
                 request.open("GET", url, true)
 
-                request.onload = () => {
+                request.onload = function () {
                     if (request.status >= 200 && request.status < 400) {
                         // Success!
                         var data = JSON.parse(request.responseText)
@@ -30,7 +21,7 @@
                     }
                 }
 
-                request.onerror = () => {
+                request.onerror = function () {
                     // There was a connection error of some sort
                     console.log("error")
                 }
@@ -42,11 +33,11 @@
 
     //render
     var render = {
-        overview: data => {
+        overview: function (data) {
             var app = document.getElementById("container");
             app.innerHTML = ''
 
-            data.forEach(house => {
+            data.forEach(function (house) {
                 var html = `
                 <div class="card">
                 <a href="${"#/" + house._id}">${house.name}</a>
@@ -63,7 +54,7 @@
 
             console.log(id)
 
-            id.forEach(id => {
+            id.forEach(function (id) {
                 var html = `
                 <div class="card">
                 <h2>${id.name}</h2>
@@ -91,14 +82,14 @@
     //routie
     routie({
         '/': function () {
-            api.get().then(data => {
+            api.get().then(function (data) {
                 render.overview(data)
                 console.log("dit is de home")
             })
         },
         '/:id': function (id) {
-            api.get().then(data => {
-                var specificId = data.filter(item => {
+            api.get().then(function (data) {
+                var specificId = data.filter(function (item) {
                     return item._id == id
                 })
 
@@ -107,7 +98,4 @@
             })
         }
     })
-
-    // start the application
-    app.init()
 })()

@@ -19,7 +19,7 @@
                 var request = new XMLHttpRequest()
                 request.open("GET", url, true)
 
-                request.onload = id => {
+                request.onload = () => {
                     if (request.status >= 200 && request.status < 400) {
                         // Success!
                         var data = JSON.parse(request.responseText)

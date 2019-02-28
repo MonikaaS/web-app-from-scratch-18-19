@@ -81,7 +81,7 @@
 
     //routie
     routie({
-        '/': function () {
+        '': function () {
             api.get().then(function (data) {
                 render.overview(data)
                 console.log("dit is de home")

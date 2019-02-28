@@ -76,18 +76,35 @@
                 </div>`
                 app.insertAdjacentHTML("beforeend", html)
             })
+        },
+        loader: function () {
+            var app = document.getElementById("container");
+            app.innerHTML = ''
+
+            console.log('loading')
+            var html = `
+            <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+          </div>`
+            app.insertAdjacentHTML("beforeend", html)
         }
     }
 
     //routie
     routie({
         '': function () {
+            render.loader()
             api.get().then(function (data) {
                 render.overview(data)
                 console.log("dit is de home")
             })
         },
         '/:id': function (id) {
+            render.loader()
             api.get().then(function (data) {
                 var specificId = data.filter(function (item) {
                     return item._id == id

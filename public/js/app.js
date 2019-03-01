@@ -52,6 +52,7 @@
                     })
                     .catch(function (error) { //als de url ophalen mislukt, maar werkt niet echt goed
                         // TODO: Handle your error!
+                        console.log(error)
                     })
             }
         }
@@ -76,7 +77,7 @@
 
                         api.store(data)
                         resolve(data)
-                    } else {
+                    } else { //status code moet ik nog doorgeven????
                         // We reached our target server, but it returned an error
                         reject(error)
                     }

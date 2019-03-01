@@ -5,6 +5,8 @@ Link naar mn applicatie:
 
 # GoT API
 
+![GoT Api](/images/Got.png)
+
 Deze applicatie laat alle houses van [GoT](https://api.got.show/doc/) zien op een pagina. Momenteel kan je alleen nog de naam van een house zien en de regio waar het vandaan komt.
 
 De API bevat informatie over de :

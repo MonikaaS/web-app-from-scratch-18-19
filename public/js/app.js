@@ -26,8 +26,6 @@
                     })
                     .catch(function (error) { //als de url ophalen mislukt, maar werkt niet echt goed
                         // TODO: Handle your error!
-                        console.log(error)
-                        render.error()
                     })
             }
         },
@@ -52,8 +50,6 @@
                     })
                     .catch(function (error) { //als de url ophalen mislukt, maar werkt niet echt goed
                         // TODO: Handle your error!
-                        console.log(error)
-                        render.error()
                     })
             }
         }

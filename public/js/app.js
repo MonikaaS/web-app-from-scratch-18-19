@@ -163,15 +163,6 @@
             <div class='rect5'></div>
           </div>`
             app.insertAdjacentHTML('beforeend', html)
-        },
-        error: function () {
-            var app = document.getElementById('container')
-            app.innerHTML = ''
-
-            var html = `
-            <h1>Oops! pagina laden niet gelukt</h1>
-          </div>`
-            app.insertAdjacentHTML('beforeend', html)
         }
     }
 

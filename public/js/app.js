@@ -1,4 +1,5 @@
 (function () {
+    // voorbeeld gebruikt van razpudding on codepen: https://codepen.io/Razpudding/pen/wNZoNQ
     'use strict'
 
     var app = {

@@ -11,7 +11,7 @@
         }
     }
 
-    const routes = { // This defines routes. It will be the place to request the proper data, and process any additional stuff with that data (filtering, sorting etc)
+    var routes = { // Hier worden de pagina's per route gerenderd, de juiste data wordt hier opgehaald en eventueel gefilterd
         overview: function () {
             render.loader()
             console.log('Routes: overview')
@@ -24,9 +24,10 @@
                 api.get().then(function (data) {
                         render.overview(data)
                     })
-                    .catch(function (error) {
+                    .catch(function (error) { //als de url ophalen mislukt, maar werkt niet echt goed
                         // TODO: Handle your error!
-                        // Did your loader stop?
+                        console.log(error)
+                        render.error()
                     })
             }
         },
@@ -40,17 +41,19 @@
                     return item.id == id
                 })
                 render.detail(specificId)
-            } else {
+            } else { //dit werkt niet als er geen localstorage is
                 api.get().then(function (data) {
                         console.log('geen localStorage')
+                        console.log(data)
                         var specificId = data.filter(function (item) {
                             return item.id == id
                         })
                         render.detail(specificId)
                     })
-                    .catch(function (error) {
+                    .catch(function (error) { //als de url ophalen mislukt, maar werkt niet echt goed
                         // TODO: Handle your error!
-                        // Did your loader stop?
+                        console.log(error)
+                        render.error()
                     })
             }
         }
@@ -59,7 +62,7 @@
     var api = {
         get: function (data) {
             return this.call(data)
-            // This would be a nice place to fetch data from a local cache or just call the api (if/else)
+            // hier wilde ik mijn local storage gaan fixen met een if else, maar dat werkt niet want ik krijg een api.get()...then is not a function in mn routes
         },
         call: function () {
             return new Promise(function (resolve, reject) {
@@ -83,6 +86,7 @@
 
                 request.onerror = function () {
                     // There was a connection error of some sort
+                    //werkt nog niet helemaal
                     console.log('error')
                 }
                 request.send()
@@ -92,15 +96,16 @@
             var data
             try {
                 data = JSON.parse(parseData)
+                //data parsen is gelukt, dus return data
             } catch (err) {
                 return err
+                //als 't fout gaat catcht ie 'm!
             }
             return data
         },
-        store: function (data) {
-            var cleanedData = []
-            data.map(function (data) {
-                cleanedData.push({
+        store: function (data) { //clean je data en store t in local storage
+            var cleanedData = data.map(function (data) {
+                return {
                     id: (data._id == undefined) ? 'no id' : data._id,
                     name: (data.name == undefined) ? 'no name' : data.name,
                     title: (data.title == undefined) ? 'no title' : data.title,
@@ -108,14 +113,14 @@
                     overlord: (data.overlord == undefined) ? 'no overlord' : data.overlord,
                     coatOfArms: (data.coatOfArms == undefined) ? 'no coat of arms' : data.coatOfArms,
                     region: (data.region == undefined) ? 'no region' : data.region
-                })
+                }
             })
 
             return localStorage.setItem('data', JSON.stringify(cleanedData))
         }
     }
 
-    //render
+    //render pagina's met template literals | hier niet je data gaan opschonen!
     var render = {
         overview: function (data) {
             var app = document.getElementById('container')
@@ -134,6 +139,7 @@
             var app = document.getElementById('container')
             app.innerHTML = ''
 
+            console.log(id)
             id.forEach(function (id) {
                 var html = `
                 <div class='card'>
@@ -174,6 +180,7 @@
     }
 
     //router beneden gezet, omdat anders de andere functies niet defined zijn
+    //Hier worden de routes gehandeld en door naar routes verwezen
     var router = {
         handle: function () {
             routie({

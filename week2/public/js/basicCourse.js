@@ -56,9 +56,16 @@ const router = { // This helps with routing, essentially connecting your app wit
 
 const api = { // This handles all API stuff
     get: function (id = false) {
+            if (localStorage.length !== 0) {
+                console.log("er is localStorage");
+                return window.localStorage
+            } else {
+                // console.log("geen localStorage");
+                return this.call(id);
+            };
+        }
         // This would be a nice place to fetch data from a local cache or just call the api (if/else)
-        return this.call(id);
-    },
+        ,
     call: function (id = false) {
         console.log('API: Get');
         return new Promise(function (resolve, reject) {

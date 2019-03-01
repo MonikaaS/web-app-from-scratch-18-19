@@ -21,21 +21,36 @@ De API bevat informatie over de :
 - cities
 - ages
 
+## instaleren:
+
+```
+git clone: https://github.com/MonikaaS/web-app-from-scratch-18-19.git
+cd web-app-from-scratch-18-19
+```
+
 ## Get request promise based(xhr)
 
 De data haal ik op door middel van een `promise` gebaseerd op een `XMLHttpRequest`. De lijst met items wordt nog weg gescrheven door het gebruik van `template literals`.
 
 Mijn code is opgedeeld in `object literals`. Elk object interacteert met elkaar door middel van functies.
 
+### data:
+
+De data heb ik door middel van een `map` opgeschoont. Om mijn detail pagina's te laden, gebruik ik een `filter` die het geselecteerde id vergelijkt met die van de data lijst en als het `id` overeenkomt, haalt die het `object` eruit.
+
+### routing:
+
+Routing heb ik gefixt met behulp van ([routie](http://projects.jga.me/routie/))
+
 ## Actor diagram
 
 Een diagram van de actoren van mijn applicatie
-![GitHub Logo](/images/actor-diagram-v1.jpg)
+![GitHub Logo](/images/actor-diagram.jpg)
 
 ## Interaction diagram
 
 Een diagram van hoe mijn code met elkaar interacteert in mijn applicatie
-![GitHub Logo](/images/interaction-diagram-v1.jpg)
+![GitHub Logo](/images/interaction-diagram.jpg)
 
 ## To Do
 
